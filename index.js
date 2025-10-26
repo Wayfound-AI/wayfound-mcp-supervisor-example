@@ -12,8 +12,8 @@ function highlightTools(text) {
 const ticker = process.argv[2];
 
 if (!ticker) {
-  console.error("Usage: node index.js <TICKER>");
-  console.error("Example: node index.js AAPL");
+  console.error("Usage: npm start <TICKER>");
+  console.error("Example: npm start AAPL");
   process.exit(1);
 }
 
