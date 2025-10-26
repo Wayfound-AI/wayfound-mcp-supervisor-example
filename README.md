@@ -34,7 +34,7 @@ Best of all? **It's just configuration.** No major code refactoring required.
 This repo contains a stock research agent that generates investment reports. Watch how Wayfound supervision elevates quality:
 
 ```bash
-$ node index.js AAPL
+$ npm start AAPL
 
 ================================================================================
 STOCK RESEARCH AGENT - Analyzing AAPL
