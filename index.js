@@ -30,41 +30,30 @@ async function runStockResearch() {
   const prompt = `
 Research the stock ticker ${ticker} and produce a comprehensive investment research report.
 
-Todays Date: ${new Date().toLocaleDateString()}
+Todays Date: ${new Date().toISOString()}
 
 The Wayfound Agent ID is: ${process.env.WAYFOUND_AGENT_ID}
 
-Your task:
-1. Get the Wayfound agent guidelines to be aware of during execution
+Here's what I need you to do:
 
-2. Delegate to 'web-researcher': Gather current info about ${ticker} (news, financials, analyst opinions, trends). Keep research concise.
+First, check the Wayfound agent guidelines so you know what's expected throughout this process. Ask Wayfound for supervisor analysis and improvement suggestions upfront - this will give you valuable guidance on what makes a great stock research report before you even start.
 
-3. Delegate to 'report-writer': Write a professional 2-3 page research report. Pass ONLY the key findings in a brief summary, not a huge data dump. The report file will be named ${ticker}_research_report_<version>.md
+Once you have that guidance, have the web-researcher gather current information about ${ticker} - things like recent news, financial metrics, analyst opinions, and market trends. Keep the research focused and concise though.
 
-4. Get the Wayfound session transcript schema
+Once you have the research findings, pass a brief summary (not a data dump) to the report-writer to create a professional 2-3 page investment report. The report should be saved as ${ticker}_research_report_<version>.md in markdown format.
 
-5. Determine the correctly formatted JSON transcript of the research session **including the report file markdown content in FULL** and evaluate using Wayfound
+After the report is written, it's time to verify the quality using Wayfound. Grab the session transcript schema, then format the complete transcript of your research session - and this is important - make sure to include the full report markdown content. Send that to Wayfound for evaluation.
 
-6. If the Wayfound evaluation results in a grade of A-, A, or A+, you are done. 
-If the grade is lower than A-, iterate by delegating back to 'report-writer' to revise the report based on the feedback from Wayfound.
-Repeat the evaluation until you achieve an A- or better.
+If Wayfound gives you an A- or better, you're done! But if the grade is lower, take the feedback and have the report-writer revise the report accordingly. Keep iterating with Wayfound until you hit that A- threshold.
 
 IMPORTANT: 
-Keep delegations concise. 
-Summarize research findings before passing to report-writer.
-ALWAYS read and include the full report markdown content in the Wayfound evaluation transcript.`;
+* summarize findings before passing to the report-writer
+* always include the complete markdown report content as an assistant message when you submit to Wayfound for evaluation.`;
 
   const response = query({
     prompt: prompt,
     options: {
       maxTurns: 50,
-      allowedTools: [
-        "Task",
-        "Read",
-        "mcp__wayfound__get_agent_details",
-        "mcp__wayfound__evaluate_session",
-        "mcp__wayfound__get_session_transcript_json_schema",
-      ],
       includePartialMessages: true,
 
       // Add MCP server for Wayfound evaluation
@@ -81,36 +70,6 @@ ALWAYS read and include the full report markdown content in the Wayfound evaluat
 
       // Auto-approve all tool usage with hard limit on web searches
       canUseTool: async (toolName, input) => {
-        if (toolName === "WebSearch") {
-          webSearchCount++;
-          console.log();
-          console.log(
-            chalk.yellow(`[PERMISSION] `) +
-              highlightTools(`WebSearch request #${webSearchCount}/3`)
-          );
-
-          if (webSearchCount > 3) {
-            console.log(
-              chalk.yellow(`[PERMISSION] `) +
-                chalk.red(`BLOCKING `) +
-                highlightTools(toolName) +
-                ` - limit of 3 searches reached`
-            );
-            return {
-              behavior: "deny",
-              message:
-                "You have reached the maximum limit of 3 web searches. Please summarize your findings and return them now.",
-              interrupt: false,
-            };
-          }
-        }
-
-        console.log();
-        console.log(
-          chalk.yellow(`[PERMISSION] `) +
-            `Auto-approving ` +
-            highlightTools(toolName)
-        );
         return {
           behavior: "allow",
           updatedInput: input,
@@ -128,7 +87,6 @@ IMPORTANT:
         "web-researcher": {
           description:
             "Agent that searches the web for current stock information, news, and market data",
-          tools: ["WebSearch"],
           prompt: `You are a financial web research specialist. Search the web for current information about the requested stock ticker.
 
 IMPORTANT: You have a HARD LIMIT of 3 web searches. Be extremely strategic and efficient. Choose your search queries carefully.
@@ -151,7 +109,6 @@ After completing your 3 searches (or if blocked from searching), return a CONCIS
         "report-writer": {
           description:
             "Agent that writes comprehensive, professional investment research reports",
-          tools: ["Write", "Read"],
           prompt: `You are a professional investment research report writer. Based on the brief research summary provided, write a concise, professional research report.
 
 Include these sections: Executive Summary, Company Overview, Recent Developments, Financial Analysis, Market Position, Investment Recommendation, Risk Factors, and Conclusion.
@@ -161,7 +118,6 @@ CRITICAL INSTRUCTIONS:
 - File name MUST be exactly: ${ticker}_research_report_<version>.md
 - Write in markdown format
 - Keep it concise: 2-3 pages maximum
-- Work quickly - don't overthink
 - Use the research summary provided, don't elaborate excessively
 - Complete the task in ONE action`,
           model: "sonnet",
