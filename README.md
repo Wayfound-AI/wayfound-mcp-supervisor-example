@@ -77,8 +77,6 @@ to submit it to Wayfound for evaluation...
 
 ================================================================================
 [RESULT] Research completed!
-[RESULT] Duration: 257572ms (4.3 minutes)
-[RESULT] Turns: 28
 [RESULT] Cost: $0.7041
 [RESULT] Status: SUCCESS
 ================================================================================
