@@ -144,7 +144,7 @@ const response = query({
     mcpServers: {
       wayfound: {
         type: "sse",
-        url: "https://your-instance.wayfound.ai/sse",
+        url: "https://app.wayfound.ai/sse",
         headers: {
           Authorization: `Bearer ${process.env.WAYFOUND_MCP_KEY}`,
         },
@@ -156,13 +156,14 @@ const response = query({
       "report-writer": {
         description: "Writes investment research reports",
         prompt: `You are a professional report writer...`,
-      }
-    }
-  }
+      },
+    },
+  },
 });
 ```
 
 That's it! Your agent now has access to:
+
 - `mcp__wayfound__get_agent_details` - Get quality guidelines
 - `mcp__wayfound__get_supervisor_analysis_for_agent` - Understand common issues
 - `mcp__wayfound__get_improvement_suggestions_for_agent` - Learn from past sessions
@@ -172,11 +173,13 @@ That's it! Your agent now has access to:
 ### What Makes This Powerful
 
 **Before Wayfound:**
+
 ```
 Agent → Generate Report → Hope it's good → Manual review needed
 ```
 
 **With Wayfound:**
+
 ```
 Agent → Get Guidelines → Generate Report → Evaluate → Grade A? → Done
                                               ↓ Grade < A-
@@ -214,6 +217,7 @@ cp .env.example .env
 ### Configuration
 
 1. **Get your Wayfound credentials:**
+
    - Log into [Wayfound Dashboard](https://app.wayfound.ai)
    - Create a new agent or select existing
    - Copy your Agent ID and MCP API Key
@@ -225,32 +229,20 @@ cp .env.example .env
    WAYFOUND_AGENT_ID=agent_...
    ```
 
-3. **Update MCP server URL in `index.js`** (line 62-68):
-   ```javascript
-   mcpServers: {
-     wayfound: {
-       type: "sse",
-       url: "https://YOUR_INSTANCE.wayfound.ai/sse", // Update this
-       headers: {
-         Authorization: `Bearer ${process.env.WAYFOUND_MCP_KEY}`,
-       },
-     },
-   }
-   ```
-
 ### Running the Example
 
 ```bash
 # Generate a research report for any stock ticker
-node index.js AAPL
+npm start AAPL
 
 # Try other tickers
-node index.js MSFT
-node index.js TSLA
-node index.js NVDA
+npm start MSFT
+npm start TSLA
+npm start NVDA
 ```
 
 The agent will:
+
 1. Query Wayfound for quality guidelines
 2. Research the stock using web searches
 3. Generate a professional investment report
@@ -279,6 +271,7 @@ wayfound-mcp-supervisor-example/
 ## Why This Matters for Your Business
 
 ### Traditional Agent Development
+
 - ❌ Manual prompt engineering takes weeks
 - ❌ No visibility into quality issues until production
 - ❌ Agents develop bad habits over time
@@ -286,6 +279,7 @@ wayfound-mcp-supervisor-example/
 - ❌ No automated improvement loop
 
 ### With Wayfound MCP Supervision
+
 - ✅ **5 minutes to integrate** - Just add MCP config
 - ✅ **Real-time guidance** - Agents learn best practices before acting
 - ✅ **Automated quality gates** - Only A-grade outputs ship
@@ -295,73 +289,10 @@ wayfound-mcp-supervisor-example/
 ### ROI Example
 
 **Stock Research Agent:**
+
 - **Without Wayfound:** 45% of reports need manual revision (~2 hours each)
 - **With Wayfound:** 100% achieve A- or better automatically
 - **Savings:** 90 hours/month for team generating 100 reports/month
-
-## Wayfound MCP Tools Reference
-
-### `mcp__wayfound__get_agent_details`
-Get your agent's configuration and quality guidelines.
-
-```javascript
-// Returns:
-{
-  agent_id: "agent_xyz",
-  guidelines: [
-    "Reports must include executive summary",
-    "Financial data must cite sources",
-    ...
-  ]
-}
-```
-
-### `mcp__wayfound__get_supervisor_analysis_for_agent`
-Understand common failure patterns from historical data.
-
-```javascript
-// Returns:
-{
-  analysis: "56% of sessions lack proper source citations...",
-  common_issues: [
-    "Missing financial data citations",
-    "Incomplete risk disclosure",
-    ...
-  ]
-}
-```
-
-### `mcp__wayfound__get_improvement_suggestions_for_agent`
-Get actionable recommendations based on past sessions.
-
-```javascript
-// Returns:
-{
-  suggestions: [
-    "Always cite sources for financial metrics",
-    "Include balance sheet data in analysis",
-    ...
-  ]
-}
-```
-
-### `mcp__wayfound__evaluate_session`
-Submit a session transcript for comprehensive evaluation.
-
-```javascript
-// Input: Full conversation transcript with agent outputs
-// Returns:
-{
-  grade: "A",
-  score: 95,
-  feedback: "Excellent work. All guidelines met...",
-  strengths: [...],
-  areas_for_improvement: [...]
-}
-```
-
-### `mcp__wayfound__get_session_analysis`
-Retrieve detailed analysis of a previously evaluated session.
 
 ## Learn More
 
@@ -373,7 +304,7 @@ Retrieve detailed analysis of a previously evaluated session.
 
 - **Issues:** [GitHub Issues](https://github.com/Wayfound-AI/wayfound-mcp-supervisor-example/issues)
 - **Wayfound Support:** support@wayfound.ai
-- **Sales Inquiries:** sales@wayfound.ai
+- **Sales Inquiries:** hello@wayfound.ai
 
 ## License
 
