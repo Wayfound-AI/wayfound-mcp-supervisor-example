@@ -192,7 +192,7 @@ The agent **learns** from supervisor feedback and **improves automatically** unt
 
 ### Prerequisites
 
-1. **Wayfound Account** - [Sign up at wayfound.ai](https://wayfound.ai)
+1. **Wayfound Account** - [Sign up at wayfound.ai](https://www.wayfound.ai/request-a-demo)
 2. **Node.js 18+** - Required for Claude Agent SDK
 3. **Anthropic API Key** - [Get from Anthropic Console](https://console.anthropic.com/)
 
