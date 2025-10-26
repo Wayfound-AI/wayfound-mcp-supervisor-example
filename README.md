@@ -101,6 +101,24 @@ to submit it to Wayfound for evaluation...
 5. **Achieved A grade** on first submission - no iteration needed!
 ```
 
+## Why This Matters for Your Business
+
+### Traditional Agent Development
+
+- ❌ Manual prompt engineering takes weeks
+- ❌ No visibility into quality issues until production
+- ❌ Agents develop bad habits over time
+- ❌ Inconsistent outputs require human review
+- ❌ No automated improvement loop
+
+### With Wayfound MCP Supervision
+
+- ✅ **5 minutes to integrate** - Just add MCP config
+- ✅ **Real-time guidance** - Agents learn best practices before acting
+- ✅ **Automated quality gates** - Only A-grade outputs ship
+- ✅ **Continuous improvement** - System learns from every session
+- ✅ **Full transparency** - Detailed evaluation breakdowns
+
 ## How It Works
 
 ### Architecture
@@ -265,24 +283,6 @@ wayfound-mcp-supervisor-example/
 - **MCP Configuration** (lines 60-68): Connects to Wayfound supervisor
 - **Web Researcher Subagent** (lines 87-106): Gathers current stock data
 - **Report Writer Subagent** (lines 109-124): Creates professional reports
-
-## Why This Matters for Your Business
-
-### Traditional Agent Development
-
-- ❌ Manual prompt engineering takes weeks
-- ❌ No visibility into quality issues until production
-- ❌ Agents develop bad habits over time
-- ❌ Inconsistent outputs require human review
-- ❌ No automated improvement loop
-
-### With Wayfound MCP Supervision
-
-- ✅ **5 minutes to integrate** - Just add MCP config
-- ✅ **Real-time guidance** - Agents learn best practices before acting
-- ✅ **Automated quality gates** - Only A-grade outputs ship
-- ✅ **Continuous improvement** - System learns from every session
-- ✅ **Full transparency** - Detailed evaluation breakdowns
 
 ## Learn More
 
