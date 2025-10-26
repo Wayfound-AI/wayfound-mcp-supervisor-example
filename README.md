@@ -110,7 +110,7 @@ to submit it to Wayfound for evaluation...
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  Stock Research Agent (Claude Sonnet)                       │
-│                                                              │
+│                                                             │
 │  1. Query Wayfound guidelines via MCP                       │
 │  2. Delegate to web-researcher subagent                     │
 │  3. Delegate to report-writer subagent                      │
@@ -122,7 +122,7 @@ to submit it to Wayfound for evaluation...
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
 │  Wayfound Supervisor (via MCP)                              │
-│                                                              │
+│                                                             │
 │  Tools Available:                                           │
 │  • mcp__wayfound__get_agent_details                         │
 │  • mcp__wayfound__get_supervisor_analysis_for_agent         │
@@ -224,9 +224,9 @@ cp .env.example .env
 
 2. **Update `.env` file:**
    ```bash
-   ANTHROPIC_API_KEY=sk-ant-...
-   WAYFOUND_MCP_KEY=wf_mcp_...
-   WAYFOUND_AGENT_ID=agent_...
+   ANTHROPIC_API_KEY=...
+   WAYFOUND_MCP_KEY=...
+   WAYFOUND_AGENT_ID=...
    ```
 
 ### Running the Example
@@ -285,14 +285,6 @@ wayfound-mcp-supervisor-example/
 - ✅ **Automated quality gates** - Only A-grade outputs ship
 - ✅ **Continuous improvement** - System learns from every session
 - ✅ **Full transparency** - Detailed evaluation breakdowns
-
-### ROI Example
-
-**Stock Research Agent:**
-
-- **Without Wayfound:** 45% of reports need manual revision (~2 hours each)
-- **With Wayfound:** 100% achieve A- or better automatically
-- **Savings:** 90 hours/month for team generating 100 reports/month
 
 ## Learn More
 
