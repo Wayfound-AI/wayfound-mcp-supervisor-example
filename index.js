@@ -61,7 +61,7 @@ IMPORTANT:
         // wayfound: wayfoundServer,
         wayfound: {
           type: "sse",
-          url: "https://cburnette.ngrok.io/sse",
+          url: "https://app.wayfound.ai/sse",
           headers: {
             Authorization: `Bearer ${process.env.WAYFOUND_MCP_KEY}`,
           },
