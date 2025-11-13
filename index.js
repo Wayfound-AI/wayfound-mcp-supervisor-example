@@ -60,8 +60,8 @@ IMPORTANT:
       mcpServers: {
         // wayfound: wayfoundServer,
         wayfound: {
-          type: "sse",
-          url: "https://app.wayfound.ai/sse",
+          type: "http",
+          url: "https://app.wayfound.ai/mcp",
           headers: {
             Authorization: `Bearer ${process.env.WAYFOUND_MCP_KEY}`,
           },
